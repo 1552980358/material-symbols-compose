@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "MaterialSymbolsCompose"
 include(":app")
 include(":material-symbols-annotation")
+include(":material-symbols-ksp")
