@@ -1,5 +1,6 @@
 package me.ks.chan.material.symbols.ksp.ext
 
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 
 internal sealed interface Importable {
@@ -10,6 +11,11 @@ internal sealed interface Importable {
 
     val asMethod: String
         get() = asClass.replaceFirstChar(Char::lowercaseChar)
+
+    val classClassName: ClassName
+        get() = ClassName(pkg, asClass)
+    val methodClassName: ClassName
+        get() = ClassName(pkg, asMethod)
 }
 
 internal data object MaterialSymbols: Importable {
