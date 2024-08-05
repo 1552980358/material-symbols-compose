@@ -3,13 +3,13 @@ agp = "8.5.1"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.24"
 
-androidx-core = "1.10.1"
-androidx-activity = "1.8.0"
-androidx-compose = "2024.04.01"
-androidx-lifecycle = "2.6.1"
+androidx-core = "1.13.1"
+androidx-activity = "1.9.1"
+androidx-compose = "2024.06.00"
+androidx-lifecycle = "2.8.4"
 
-androidx-espresso = "3.5.1"
-androidx-junit = "1.1.5"
+androidx-espresso = "3.6.1"
+androidx-junit = "1.2.1"
 junit = "4.13.2"
 
 [libraries]
