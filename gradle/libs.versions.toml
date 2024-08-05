@@ -2,6 +2,7 @@
 agp = "8.5.1"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.24"
+kotlinpoet = "1.18.1"
 
 androidx-core = "1.13.1"
 androidx-activity = "1.9.1"
@@ -14,6 +15,9 @@ junit = "4.13.2"
 
 [libraries]
 google-ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
+squareup-kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
+squareup-kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet" }
+
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }

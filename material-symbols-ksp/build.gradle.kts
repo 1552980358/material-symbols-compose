@@ -9,4 +9,6 @@ java {
 
 dependencies {
     implementation(libs.google.ksp.api)
+    implementation(libs.squareup.kotlinpoet)
+    implementation(libs.squareup.kotlinpoet.ksp)
 }
