@@ -8,6 +8,8 @@ java {
 }
 
 dependencies {
+    implementation(project(":material-symbols-annotation"))
+
     implementation(libs.google.ksp.api)
     implementation(libs.squareup.kotlinpoet)
     implementation(libs.squareup.kotlinpoet.ksp)
