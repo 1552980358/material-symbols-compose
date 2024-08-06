@@ -14,7 +14,7 @@ interface Coder {
 
 }
 
-fun CodeGenerator.generateWith(coder: Coder) {
+infix fun CodeGenerator.starts(coder: Coder) {
     coder.fileSpec
         .writeTo(codeGenerator = this, coder.dependencies)
 }
