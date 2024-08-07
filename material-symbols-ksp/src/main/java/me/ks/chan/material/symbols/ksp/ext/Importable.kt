@@ -21,12 +21,13 @@ internal sealed interface Importable {
 internal data object MaterialSymbols: Importable {
     override val pkg: String
         get() = "me.ks.chan.material.symbols"
-    override val asClass: String
-        get() = throw IllegalAccessException()
-    override val asMethod: String
-        get() = "materialSymbol"
-    val filename: String
-        get() = this::class.java.simpleName
+
+    data object MaterialSymbol: Importable by MaterialSymbols {
+        override val asClass: String
+            get() = super.asClass
+        override val asMethod: String
+            get() = super.asMethod
+    }
 }
 
 internal sealed interface ComposeUi: Importable {

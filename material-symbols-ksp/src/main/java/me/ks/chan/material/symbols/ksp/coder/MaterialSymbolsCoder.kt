@@ -22,7 +22,7 @@ object MaterialSymbolsCoder: Coder {
         get() = Dependencies(aggregating = false)
 
     override val fileSpec: FileSpec
-        get() = FileSpec.builder(MaterialSymbols.pkg, MaterialSymbols.filename)
+        get() = FileSpec.builder(MaterialSymbols.MaterialSymbol.classClassName)
             .addImports()
             .addProperty(ViewportSize.asProperty)
             .addFunction(MaterialSymbolLazyFun)
@@ -62,7 +62,7 @@ private inline val PathBuilderBlock: LambdaTypeName
     )
 
 private inline val MaterialSymbolLazyFun: FunSpec
-    get() = FunSpec.builder(MaterialSymbols.asMethod)
+    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.asMethod)
         .addParameter("name", String::class)
         .addParameter("size", Int::class)
         .addParameter("pathBuilder", PathBuilderBlock)
@@ -80,7 +80,7 @@ private inline val MaterialSymbolLazyFun: FunSpec
         .build()
 
 private inline val MaterialSymbolBuilderFun: FunSpec
-    get() = FunSpec.builder(MaterialSymbols.asMethod)
+    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.asMethod)
         .addParameter("name", String::class)
         .addParameter("size", ComposeUiUnit.Dp.classClassName)
         .addParameter("pathBuilder", PathBuilderBlock)
