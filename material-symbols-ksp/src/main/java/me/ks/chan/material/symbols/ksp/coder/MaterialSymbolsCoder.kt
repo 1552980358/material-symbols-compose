@@ -4,6 +4,7 @@ import com.google.devtools.ksp.processing.Dependencies
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
@@ -51,6 +52,7 @@ private data object ViewportSize {
 
     inline val asProperty: PropertySpec
         get() = PropertySpec.builder(NAME, VALUE::class)
+            .addModifiers(KModifier.PRIVATE)
             .initializer(FORMAT, VALUE)
             .build()
 }
