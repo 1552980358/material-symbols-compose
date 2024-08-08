@@ -14,7 +14,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 class GoogleMaterialSymbolsRepository(
-    kspLogger: KSPLogger,
     icon: String,
     materialSymbolIcon: MaterialSymbolIcon,
 ) {
@@ -25,21 +24,6 @@ class GoogleMaterialSymbolsRepository(
             icon + "/materialsymbols" + materialSymbolIcon.styleUrlOption + "/" +
             icon + materialSymbolIcon.customizationOption + "_" +
             "${materialSymbolIcon.opticalSizeInt}px.xml"
-    }
-
-    init {
-        val iconName = icon.asPascalCase
-
-        kspLogger.apply {
-            info(
-                "Icon=${iconName}: " +
-                    "Style=${materialSymbolIcon.style.name}, " +
-                    "Weight=${materialSymbolIcon.weight.name}, " +
-                    "Grade=${materialSymbolIcon.grade.name}, " +
-                    "Filled=${materialSymbolIcon.filled}"
-            )
-            info("$iconName URL: $repositoryUrl")
-        }
     }
 
     private val repositoryRequest: Request
