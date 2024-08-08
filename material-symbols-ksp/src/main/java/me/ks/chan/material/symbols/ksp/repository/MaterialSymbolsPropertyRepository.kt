@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import me.ks.chan.material.symbols.annotation.MaterialSymbolOpticalSize
 import me.ks.chan.material.symbols.ksp.annotation.MaterialSymbolIcon
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiVectorGraphics
@@ -33,6 +34,7 @@ class MaterialSymbolsPropertyRepository(
 
     override fun process(unprocessed: List<PathBuilderCommand>): PropertySpec {
         return PropertySpec.builder(name = propertyDeclaration.simpleName.asString(), type = ImageVectorType)
+            .addOriginatingKSFile(propertyDeclaration.containingFile!!)
             .addModifiers(KModifier.OVERRIDE)
             .delegate(
                 CodeBlock.builder()
