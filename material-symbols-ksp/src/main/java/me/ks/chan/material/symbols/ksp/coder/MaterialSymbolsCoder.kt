@@ -8,6 +8,7 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.UNIT
 import com.squareup.kotlinpoet.asClassName
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiGraphics
@@ -25,8 +26,9 @@ object MaterialSymbolsCoder: Coder {
     override val fileSpec: FileSpec
         get() = FileSpec.builder(MaterialSymbols.MaterialSymbol.classClassName)
             .addImports()
-            .addProperty(ViewportSize.asProperty)
+            .addType(MaterialSymbolsObject)
             .addFunction(MaterialSymbolLazyFun)
+            .addProperty(ViewportSize.asProperty)
             .addFunction(MaterialSymbolBuilderFun)
             .build()
 
@@ -44,6 +46,10 @@ private fun FileSpec.Builder.addImports() = apply {
     importClass(ComposeUiUnit.Dp)
     importMethod(ComposeUiUnit.Dp)
 }
+
+private inline val MaterialSymbolsObject: TypeSpec
+    get() = TypeSpec.objectBuilder(MaterialSymbols.asClass)
+        .build()
 
 private data object ViewportSize {
     const val NAME = "ViewportSize"
