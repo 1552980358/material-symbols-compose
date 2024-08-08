@@ -15,8 +15,8 @@ class GoogleMaterialSymbolsRepository(
 
     @Suppress("SpellCheckingInspection")
     val repositoryUrl by lazy {
-        "https://github.com/google/material-design-icons/blob/master/symbols/android/" +
-            icon + "/materialsymbols" + materialSymbolIcon.styleUrlOption + "/" +
+        "https://raw.githubusercontent.com/google/material-design-icons/master/symbols/android/" +
+            icon + "/materialsymbols" + materialSymbolIcon.styleUrlOption + '/' +
             icon + materialSymbolIcon.customizationOption +
             "_${materialSymbolIcon.opticalSizeInt}px.xml"
     }
@@ -35,7 +35,7 @@ class GoogleMaterialSymbolsRepository(
 
 }
 
-private val MaterialSymbolIcon.customizationOption: String
+private inline val MaterialSymbolIcon.customizationOption: String
     get() = when {
         weight == MaterialSymbolWeight.Regular &&
             grade == MaterialSymbolGrade.Regular &&
