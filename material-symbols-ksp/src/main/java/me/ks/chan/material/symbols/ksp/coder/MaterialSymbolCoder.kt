@@ -15,7 +15,7 @@ import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
 import me.ks.chan.material.symbols.ksp.ext.importClass
 import me.ks.chan.material.symbols.ksp.ext.importMethod
 
-class MaterialSymbolIconCoder(
+class MaterialSymbolCoder(
     private val classDeclaration: KSClassDeclaration,
     private val propertySpecList: List<PropertySpec>
 ): Coder {
