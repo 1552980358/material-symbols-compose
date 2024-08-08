@@ -18,7 +18,7 @@ sealed class PathBuilderCommand(
     )
 }
 
-object PathBuilderRepository {
+object PathBuilderRepository: ProcessRepository<List<String>, List<PathBuilderCommand>> {
 
     private enum class VectorDrawablePathCommand(val command: Char) {
         MoveTo('M'),
@@ -46,8 +46,8 @@ object PathBuilderRepository {
         }
     }
 
-    fun process(pathCommandList: List<String>): List<PathBuilderCommand> {
-        return pathCommandList.mapNotNull { pathCommand ->
+    override fun process(unprocessed: List<String>): List<PathBuilderCommand> {
+        return unprocessed.mapNotNull { pathCommand ->
             VectorDrawablePathCommand[pathCommand.first()]?.pathBuilderCommand(pathCommand)
         }
     }

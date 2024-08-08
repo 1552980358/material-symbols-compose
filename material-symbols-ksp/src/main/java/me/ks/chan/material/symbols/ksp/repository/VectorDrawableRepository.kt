@@ -2,11 +2,11 @@ package me.ks.chan.material.symbols.ksp.repository
 
 import kotlin.text.MatchResult.Destructured
 
-object VectorDrawableRepository {
-    fun process(vectorDrawable: String): List<String> {
-            return vectorDrawable.lineSequence()
-                .pathCommand
-                .asPathCommandList
+object VectorDrawableRepository: ProcessRepository<String, List<String>> {
+    override fun process(unprocessed: String): List<String> {
+        return unprocessed.lineSequence()
+            .pathCommand
+            .asPathCommandList
     }
 }
 
