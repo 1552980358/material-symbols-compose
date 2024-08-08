@@ -8,6 +8,7 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiVectorGraphics
 import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
@@ -29,6 +30,7 @@ class MaterialSymbolIconCoder(
                 .addImports()
                 .addType(
                     TypeSpec.objectBuilder(classname)
+                        .addOriginatingKSFile(classDeclaration.containingFile!!)
                         .supertype(classDeclaration, supertype)
                         .addProperties(propertySpecList)
                         .build()
