@@ -18,7 +18,7 @@ sealed class PathBuilderCommand(
     )
 }
 
-class PathBuilderRepository {
+object PathBuilderRepository {
 
     private enum class VectorDrawablePathCommand(val command: Char) {
         MoveTo('M'),
