@@ -89,6 +89,7 @@ private inline val MaterialSymbolLazyFun: FunSpec
 
 private inline val MaterialSymbolBuilderFun: FunSpec
     get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.asMethod)
+        .addModifiers(KModifier.PRIVATE)
         .addParameter("name", String::class)
         .addParameter("size", ComposeUiUnit.Dp.classClassName)
         .addParameter("pathBuilder", PathBuilderBlock)
