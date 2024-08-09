@@ -51,7 +51,7 @@ enum class MaterialSymbolStyle { Outlined, Rounded, Sharp }
  **/
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Weight(val value: MaterialSymbolWeight = MaterialSymbolWeight.Regular)
+annotation class Weight(val value: MaterialSymbolWeight)
 
 /**
  * This is the enum class for [Weight.value]
@@ -71,7 +71,7 @@ enum class MaterialSymbolWeight { Thinnest, Thin, Thinner, Regular, Bolder, Bold
  **/
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Grade(val value: MaterialSymbolGrade = MaterialSymbolGrade.Regular)
+annotation class Grade(val value: MaterialSymbolGrade)
 
 /**
  * This is the enum class for [Grade.value]
@@ -102,9 +102,7 @@ annotation class Filled
  **/
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.SOURCE)
-annotation class OpticalSize(
-    val value: MaterialSymbolOpticalSize = MaterialSymbolOpticalSize.Regular
-)
+annotation class OpticalSize(val value: MaterialSymbolOpticalSize)
 
 /**
  * This is the enum class for [OpticalSize.value]
