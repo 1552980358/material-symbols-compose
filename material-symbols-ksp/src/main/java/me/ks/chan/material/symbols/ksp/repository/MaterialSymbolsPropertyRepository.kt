@@ -9,6 +9,7 @@ import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import me.ks.chan.material.symbols.annotation.MaterialSymbolOpticalSize
 import me.ks.chan.material.symbols.ksp.annotation.MaterialSymbolIcon
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiVectorGraphics
+import me.ks.chan.material.symbols.ksp.ext.Importable
 import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
 
 class MaterialSymbolsPropertyRepository(
@@ -39,7 +40,7 @@ class MaterialSymbolsPropertyRepository(
             .delegate(
                 CodeBlock.builder()
                     .beginControlFlow(
-                        controlFlow = "${MaterialSymbols.MaterialSymbol.asMethod}(name = %S, size = %L)",
+                        controlFlow = "${MaterialSymbols.MaterialSymbol.short(Importable.NameType.Method)}(name = %S, size = %L)",
                         args = arrayOf(iconName, opticalSize)
                     )
                     .addPathBuilderCommands(unprocessed)
@@ -52,7 +53,7 @@ class MaterialSymbolsPropertyRepository(
 }
 
 private inline val ImageVectorType: TypeName
-    get() = ComposeUiVectorGraphics.ImageVector.classClassName
+    get() = ComposeUiVectorGraphics.ImageVector.className()
 
 private inline val MaterialSymbolIcon.opticalSizeInt: Int
     get() = when (opticalSize) {

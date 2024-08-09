@@ -14,9 +14,9 @@ import com.squareup.kotlinpoet.asClassName
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiGraphics
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiUnit
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiVectorGraphics
+import me.ks.chan.material.symbols.ksp.ext.Importable
 import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
-import me.ks.chan.material.symbols.ksp.ext.importClass
-import me.ks.chan.material.symbols.ksp.ext.importMethod
+import me.ks.chan.material.symbols.ksp.ext.import
 
 object MaterialSymbolsCoder: Coder {
 
@@ -24,7 +24,7 @@ object MaterialSymbolsCoder: Coder {
         get() = Dependencies(aggregating = false)
 
     override val fileSpec: FileSpec
-        get() = FileSpec.builder(MaterialSymbols.MaterialSymbol.classClassName)
+        get() = FileSpec.builder(MaterialSymbols.MaterialSymbol.className())
             .addImports()
             .addType(MaterialSymbolsObject)
             .addFunction(MaterialSymbolLazyFun)
@@ -35,20 +35,20 @@ object MaterialSymbolsCoder: Coder {
 }
 
 private fun FileSpec.Builder.addImports() = apply {
-    importClass(ComposeUiGraphics.Color)
-    importClass(ComposeUiGraphics.SolidColor)
-    importClass(ComposeUiGraphics.StrokeJoin)
+    import(ComposeUiGraphics.Color)
+    import(ComposeUiGraphics.SolidColor)
+    import(ComposeUiGraphics.StrokeJoin)
 
-    importClass(ComposeUiVectorGraphics.ImageVector)
-    importClass(ComposeUiVectorGraphics.PathBuilder)
-    importMethod(ComposeUiVectorGraphics.Path)
+    import(ComposeUiVectorGraphics.ImageVector)
+    import(ComposeUiVectorGraphics.PathBuilder)
+    import(ComposeUiVectorGraphics.Path, Importable.NameType.Method)
 
-    importClass(ComposeUiUnit.Dp)
-    importMethod(ComposeUiUnit.Dp)
+    import(ComposeUiUnit.Dp)
+    import(ComposeUiUnit.Dp, Importable.NameType.Method)
 }
 
 private inline val MaterialSymbolsObject: TypeSpec
-    get() = TypeSpec.objectBuilder(MaterialSymbols.asClass)
+    get() = TypeSpec.objectBuilder(MaterialSymbols.short())
         .build()
 
 private data object ViewportSize {
@@ -65,35 +65,38 @@ private data object ViewportSize {
 
 private inline val PathBuilderBlock: LambdaTypeName
     get() = LambdaTypeName.get(
-        receiver = ComposeUiVectorGraphics.PathBuilder.classClassName,
+        receiver = ComposeUiVectorGraphics.PathBuilder.className(),
         returnType = UNIT,
     )
 
 private inline val MaterialSymbolLazyFun: FunSpec
-    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.asMethod)
+    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.short(Importable.NameType.Method))
         .addParameter("name", String::class)
         .addParameter("size", Int::class)
         .addParameter("pathBuilder", PathBuilderBlock)
         .returns(
             Lazy::class.asClassName()
-                .parameterizedBy(ComposeUiVectorGraphics.ImageVector.classClassName)
+                .parameterizedBy(ComposeUiVectorGraphics.ImageVector.className())
         )
         .addCode(
             CodeBlock.Builder()
                 .beginControlFlow("return lazy")
-                .addStatement("materialSymbol(name = name, size = size.dp, pathBuilder = pathBuilder)")
+                .addStatement(
+                    MaterialSymbols.MaterialSymbol.short(Importable.NameType.Method) +
+                    "(name = name, size = size.dp, pathBuilder = pathBuilder)"
+                )
                 .endControlFlow()
                 .build()
         )
         .build()
 
 private inline val MaterialSymbolBuilderFun: FunSpec
-    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.asMethod)
+    get() = FunSpec.builder(MaterialSymbols.MaterialSymbol.short(Importable.NameType.Method))
         .addModifiers(KModifier.PRIVATE)
         .addParameter("name", String::class)
-        .addParameter("size", ComposeUiUnit.Dp.classClassName)
+        .addParameter("size", ComposeUiUnit.Dp.className())
         .addParameter("pathBuilder", PathBuilderBlock)
-        .returns(ComposeUiVectorGraphics.ImageVector.classClassName)
+        .returns(ComposeUiVectorGraphics.ImageVector.className())
         .addCode(
             CodeBlock.Builder()
                 .add("return ImageVector")

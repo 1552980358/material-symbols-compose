@@ -3,67 +3,74 @@ package me.ks.chan.material.symbols.ksp.ext
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 
-internal sealed interface Importable {
-    val pkg: String
+internal sealed class Importable {
 
-    val asClass: String
+    enum class NameType {
+        Class, Method
+    }
+
+    abstract val packageName: String
+
+    protected open val classname: String
         get() = this::class.java.simpleName
 
-    val asMethod: String
-        get() = asClass.replaceFirstChar(Char::lowercaseChar)
+    fun short(name: NameType = NameType.Class): String = classname.let {
+        it.takeIf { name == NameType.Class } ?: it.replaceFirstChar(Char::lowercaseChar)
+    }
 
-    val classClassName: ClassName
-        get() = ClassName(pkg, asClass)
-    val methodClassName: ClassName
-        get() = ClassName(pkg, asMethod)
+    fun full(name: NameType = NameType.Class): String {
+        return "${packageName}.${short(name)}"
+    }
+
+    fun className(name: NameType = NameType.Class): ClassName {
+        return ClassName(packageName, short(name))
+    }
+
 }
 
-internal data object MaterialSymbols: Importable {
-    override val pkg: String
+internal data object MaterialSymbols: Importable() {
+    override val packageName: String
         get() = "me.ks.chan.material.symbols"
 
-    data object MaterialSymbol: Importable by MaterialSymbols {
-        override val asClass: String
-            get() = super.asClass
-        override val asMethod: String
-            get() = super.asMethod
+    data object MaterialSymbol: Importable() {
+        override val packageName: String
+            get() = MaterialSymbols.packageName
     }
 }
 
-internal sealed interface ComposeUi: Importable {
-    override val pkg: String
+internal sealed class ComposeUi: Importable() {
+    override val packageName: String
         get() = "androidx.compose.ui"
 }
 
-internal sealed interface ComposeUiGraphics: ComposeUi {
-    override val pkg: String
-        get() = "${super.pkg}.graphics"
+internal sealed class ComposeUiGraphics: ComposeUi() {
+    override val packageName: String
+        get() = "${super.packageName}.graphics"
 
-    data object Color: ComposeUiGraphics
-    data object SolidColor: ComposeUiGraphics
-    data object StrokeJoin: ComposeUiGraphics
+    data object Color: ComposeUiGraphics()
+    data object SolidColor: ComposeUiGraphics()
+    data object StrokeJoin: ComposeUiGraphics()
 }
 
-internal sealed interface ComposeUiVectorGraphics: ComposeUiGraphics {
-    override val pkg: String
-        get() = "${super.pkg}.vector"
+internal sealed class ComposeUiVectorGraphics: ComposeUiGraphics() {
+    override val packageName: String
+        get() = "${super.packageName}.vector"
 
-    data object ImageVector: ComposeUiVectorGraphics
-    data object PathBuilder: ComposeUiVectorGraphics
-    data object Path: ComposeUiVectorGraphics
+    data object ImageVector: ComposeUiVectorGraphics()
+    data object PathBuilder: ComposeUiVectorGraphics()
+    data object Path: ComposeUiVectorGraphics()
 }
 
-internal sealed interface ComposeUiUnit: ComposeUi {
-    override val pkg: String
-        get() = "${super.pkg}.unit"
+internal sealed class ComposeUiUnit: ComposeUi() {
+    override val packageName: String
+        get() = "${super.packageName}.unit"
 
-    data object Dp: ComposeUiUnit
+    data object Dp: ComposeUiUnit()
 }
 
-internal fun FileSpec.Builder.importClass(importable: Importable) = apply {
-    addImport(importable.pkg, importable.asClass)
-}
-
-internal fun FileSpec.Builder.importMethod(importable: Importable) = apply {
-    addImport(importable.pkg, importable.asMethod)
+internal fun FileSpec.Builder.import(
+    importable: Importable,
+    nameType: Importable.NameType = Importable.NameType.Class
+): FileSpec.Builder = apply {
+    addImport(importable.packageName, importable.short(nameType))
 }

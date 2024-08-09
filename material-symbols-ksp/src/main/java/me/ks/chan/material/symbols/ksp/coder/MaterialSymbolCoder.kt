@@ -11,9 +11,9 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
 import me.ks.chan.material.symbols.ksp.ext.ComposeUiVectorGraphics
+import me.ks.chan.material.symbols.ksp.ext.Importable
 import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
-import me.ks.chan.material.symbols.ksp.ext.importClass
-import me.ks.chan.material.symbols.ksp.ext.importMethod
+import me.ks.chan.material.symbols.ksp.ext.import
 
 class MaterialSymbolCoder(
     private val classDeclaration: KSClassDeclaration,
@@ -37,7 +37,7 @@ class MaterialSymbolCoder(
                 )
                 .addProperty(
                     PropertySpec.builder(supertype.simpleName, supertype)
-                        .receiver(MaterialSymbols.classClassName)
+                        .receiver(MaterialSymbols.className())
                         .getter(
                             FunSpec.getterBuilder()
                                 .addStatement(
@@ -53,9 +53,9 @@ class MaterialSymbolCoder(
 }
 
 private fun FileSpec.Builder.addImports() = apply {
-    importClass(ComposeUiVectorGraphics.ImageVector)
-    importClass(MaterialSymbols)
-    importMethod(MaterialSymbols.MaterialSymbol)
+    import(ComposeUiVectorGraphics.ImageVector)
+    import(MaterialSymbols)
+    import(MaterialSymbols.MaterialSymbol, Importable.NameType.Method)
 }
 
 private fun TypeSpec.Builder.supertype(
