@@ -13,22 +13,12 @@ import me.ks.chan.material.symbols.ksp.ext.Importable
 import me.ks.chan.material.symbols.ksp.ext.MaterialSymbols
 
 class MaterialSymbolsPropertyRepository(
-    classname: String,
     private val propertyDeclaration: KSPropertyDeclaration,
-    private val materialSymbolIcon: MaterialSymbolIcon,
+    materialSymbolIcon: MaterialSymbolIcon,
 ): ProcessRepository<List<PathBuilderCommand>, PropertySpec> {
 
     private val iconName = buildString {
-        append(classname)
-        if (materialSymbolIcon.filled) {
-            append("-Filled")
-        }
-        append(".Weight-")
-        append(materialSymbolIcon.weight.name)
-        append(".Grade-")
-        append(materialSymbolIcon.grade.name)
-        append(".OpticalSize-")
-        append(materialSymbolIcon.opticalSize.name)
+        append(propertyDeclaration.qualifiedName!!.asString())
     }
 
     private val opticalSize = materialSymbolIcon.opticalSizeInt
