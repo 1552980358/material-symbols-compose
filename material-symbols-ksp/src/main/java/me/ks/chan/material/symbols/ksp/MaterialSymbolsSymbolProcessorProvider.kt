@@ -3,6 +3,7 @@ package me.ks.chan.material.symbols.ksp
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
+import okhttp3.OkHttpClient
 
 class MaterialSymbolsSymbolProcessorProvider: SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
@@ -15,6 +16,7 @@ class MaterialSymbolsSymbolProcessorProvider: SymbolProcessorProvider {
         return MaterialSymbolsSymbolProcessor(
             codeGenerator = environment.codeGenerator,
             kspLogger = kspLogger,
+            okHttpClient = OkHttpClient()
         )
     }
 }
