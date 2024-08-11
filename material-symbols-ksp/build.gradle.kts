@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("maven-publish")
 }
 
 java {
@@ -14,4 +15,14 @@ dependencies {
     implementation(libs.squareup.kotlinpoet)
     implementation(libs.squareup.kotlinpoet.ksp)
     implementation(libs.squareup.okhttp)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = "ksp"
+            version = project.version.toString()
+        }
+    }
 }

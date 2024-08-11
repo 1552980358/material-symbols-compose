@@ -6,3 +6,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.jetbrains.compose.compiler) apply false
 }
+
+allprojects {
+    group = "me.ks.chan.material-symbols"
+    version = "1.0.0-alpha01"
+}
