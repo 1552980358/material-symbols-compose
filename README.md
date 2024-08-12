@@ -41,7 +41,7 @@
 
 ### General Usage
 
-[MSc](https://github.com/1552980358/material-symbols-compose)supports declaring symbols in both interface and abstract class. 
+[MSc](https://github.com/1552980358/material-symbols-compose) supports declaring symbols in both interface and abstract class. 
 You can refers to [interface](app/src/main/java/me/ks/chan/material/symbols/example/icon/Home.kt) 
 or [abstract class](app/src/main/java/me/ks/chan/material/symbols/example/icon/Settings.kt) 
 implementation examples.
