@@ -53,3 +53,6 @@ Please read the rules of annotating [@MaterialSymbol](material-symbols-annotatio
 You can customize the generated symbol by adding [customization annotations](material-symbols-annotation/src/main/kotlin/me/ks/chan/material/symbols/annotation/MaterialSymbolCustomize.kt)
 to the symbol declaration.
 
+## License 
+
+### [Apache License 2.0](LICENSE)
