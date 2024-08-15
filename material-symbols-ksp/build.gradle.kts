@@ -23,6 +23,8 @@ publishing {
             groupId = project.group.toString()
             artifactId = "ksp"
             version = project.version.toString()
+
+            from(components["java"])
         }
     }
 }

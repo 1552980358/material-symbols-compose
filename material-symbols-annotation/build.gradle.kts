@@ -14,6 +14,8 @@ publishing {
             groupId = rootProject.group.toString()
             artifactId = "annotation"
             version = project.version.toString()
+
+            from(components["java"])
         }
     }
 }
