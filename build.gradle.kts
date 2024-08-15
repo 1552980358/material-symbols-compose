@@ -8,6 +8,6 @@ plugins {
 }
 
 allprojects {
-    group = "me.ks.chan.material-symbols"
+    group = "me.ks.chan.material-symbols-compose"
     version = "1.0.0-alpha01"
 }
