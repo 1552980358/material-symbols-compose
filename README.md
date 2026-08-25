@@ -1,6 +1,6 @@
 # MSc: material-symbols-compose
 
-[![](https://jitpack.io/v/1552980358/material-symbols-compose.svg)](https://jitpack.io/#1552980358/material-symbols-compose)
+[![](https://jitpack.io/v/KShChan/material-symbols-compose.svg)](https://jitpack.io/#KShChan/material-symbols-compose)
 
 ## Install
 
@@ -31,8 +31,8 @@
       dependencies {
           // ...
           val materialSymbolsCompose = "<MSC_VERSION>"
-          implementation("com.github.1552980358.material-symbols-compose:annotation:$materialSymbolsCompose")
-          ksp("com.github.1552980358.material-symbols-compose:ksp:$materialSymbolsCompose")
+          implementation("com.github.KShChan.material-symbols-compose:annotation:$materialSymbolsCompose")
+          ksp("com.github.KShChan.material-symbols-compose:ksp:$materialSymbolsCompose")
           // ...
       }
       ```
@@ -41,7 +41,7 @@
 
 ### General Usage
 
-[MSc](https://github.com/1552980358/material-symbols-compose) supports declaring symbols in both interface and abstract class.
+[MSc](https://github.com/KShChan/material-symbols-compose) supports declaring symbols in both interface and abstract class.
 
 ```kotlin
 // import me.ks.chan.material.symbols.annotation.MaterialSymbol
