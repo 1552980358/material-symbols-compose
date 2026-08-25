@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "me.ks.chan.material.symbols.example"
-    compileSdk = 34
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "me.ks.chan.material.symbols.example"
-        minSdk = 21
-        targetSdk = 34
+        minSdk = 23
+        targetSdk = compileSdk
         versionCode = 1
         versionName = "1.0"
 
